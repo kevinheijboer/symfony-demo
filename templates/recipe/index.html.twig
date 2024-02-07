@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recipes{% endblock %}
+
+{% block body %}
+<div class="grid grid-cols-3 gap-4">
+    {% for recipe in recipes %}
+        <div class="p-4 border rounded shadow">
+            <h2 class="text-2xl mb-2 font-bold">{{ recipe.title }}</h2>
+            <img class="w-64 h-64 object-cover mb-2" src="{{ recipe.imagePath }}" alt="{{ recipe.title }}" />
+            <p class="mb-2">Preparation time: {{ recipe.preparationTime }} minutes</p>
+            <p class="mb-2">{{ recipe.description }}</p>
+            <ul class="list-disc list-inside">
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient.name }}: {{ ingredient.quantity }} gr</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <p>No recipes found.</p>
+    {% endfor %}
+    <div class="p-4 flex items-center justify-center">
+        <a href="/recipe/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add Recipe
+        </a>
+    </div>
+</div>
+{% endblock %}
